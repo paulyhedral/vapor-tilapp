@@ -2,14 +2,14 @@
 
 set -e
 
-#docker run \
-#  -it \
-#  --env-file .env \
-#  -p 8080:8080 \
-#  tilapp:latest
+name=${1:-tilapp}
+scriptdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
+${scriptdir}/docker-start-container.sh
+
+echo "Running application '${name}'..."
 docker exec \
   -it \
   -w /build \
-  tilapp \
+  ${name} \
   swift run Run

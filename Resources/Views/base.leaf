@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="stylesheet" href="/styles/style.css"/>
     <title>#(title) | Acronyms</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous" />
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"/>
     #if(title == "Create An Acronym" || title == "Edit Acronym"):
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
-          integrity="sha384-KZO2FRYNmIHerhfYMjCIUaJeGBRXP7CN24SiNSG+wdDzgwvxWbl16wMVtWiJTcMt" crossorigin="anonymous" />
+          integrity="sha384-KZO2FRYNmIHerhfYMjCIUaJeGBRXP7CN24SiNSG+wdDzgwvxWbl16wMVtWiJTcMt" crossorigin="anonymous"/>
     #endif
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
@@ -28,21 +28,27 @@
     <div class="collapse navbar-collapse"
          id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item #if(title == "Home page"): active #endif">
+            <li class="nav-item #if(title == " Home page"): active #endif">
             <a href="/" class="nav-link">Home</a>
             </li>
 
-            <li class="nav-item #if(title == "All Users"): active #endif">
+            <li class="nav-item #if(title == " All Users"): active #endif">
             <a href="/users" class="nav-link">All Users</a>
             </li>
 
-            <li class="nav-item #if(title == "All Categories"): active #endif">
+            <li class="nav-item #if(title == " All Categories"): active #endif">
             <a href="/categories" class="nav-link">All Categories</a>
             </li>
 
-            <li class="nav-item #if(title == "Create An Acronym"): active #endif">
+            <li class="nav-item #if(title == " Create An Acronym"): active #endif">
             <a href="/acronyms/create" class="nav-link">Create An Acronym</a>
             </li>
+
+            #if(!userLoggedIn):
+            <li class="nav-item #if(title == " Register"): active #endif">
+            <a href="/register" class="nav-link">Register</a>
+            </li>
+            #endif
         </ul>
 
         #if(userLoggedIn):
@@ -70,9 +76,13 @@
 <script src="/scripts/cookies.js"></script>
 #endif
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2"
+        crossorigin="anonymous"></script>
 #if(title == "Create An Acronym" || title == "Edit Acronym"):
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha384-JnbsSLBmv2/R0fUmF2XYIcAEMPHEAO51Gitn9IjL4l89uFTIgtLF1+jqIqqd9FSk" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
+        integrity="sha384-JnbsSLBmv2/R0fUmF2XYIcAEMPHEAO51Gitn9IjL4l89uFTIgtLF1+jqIqqd9FSk"
+        crossorigin="anonymous"></script>
 <script src="/scripts/createAcronym.js"></script>
 #endif
 
