@@ -1,12 +1,11 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
+#extend("base"):
+#export("content"):
+<img src="/images/logo.png"
+      class="mx-auto d-block" alt="TIL Logo" />
 
-  <title>#(title)</title>
-</head>
+<h1>Acronyms</h1>
 
-<body>
-  <h1>#(title)</h1>
-</body>
-</html>
+#extend("acronymsTable")
+
+#endexport
+#endextend
