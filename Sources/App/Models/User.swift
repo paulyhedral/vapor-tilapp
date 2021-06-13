@@ -20,13 +20,22 @@ final class User : Model {
     @Children(for: \.$user)
     var acronyms : [Acronym]
 
-    init() {}
+    @OptionalField(key: "thirdPartyAuth")
+    var thirdPartyAuth : String?
 
-    init(id : UUID? = nil, name : String, username : String, password : String) {
+    @OptionalField(key: "thirdPartyAuthId")
+    var thirdPartyAuthId : String?
+
+    init() {
+    }
+
+    init(id : UUID? = nil, name : String, username : String, password : String, thirdPartyAuth : String? = nil, thirdPartyAuthId : String? = nil) {
         self.id = id
         self.name = name
         self.username = username
         self.password = password
+self.thirdPartyAuth = thirdPartyAuth
+self.thirdPartyAuthId = thirdPartyAuthId
     }
 
     final class Public : Content {
@@ -63,14 +72,18 @@ extension EventLoopFuture where Value : User {
 extension Collection where Element : User {
 
     func convertToPublic() -> [User.Public] {
-        return self.map { $0.convertToPublic() }
+        return self.map {
+            $0.convertToPublic()
+        }
     }
 }
 
 extension EventLoopFuture where Value == Array<User> {
 
     func convertToPublic() -> EventLoopFuture<[User.Public]> {
-        return self.map { $0.convertToPublic() }
+        return self.map {
+            $0.convertToPublic()
+        }
     }
 }
 

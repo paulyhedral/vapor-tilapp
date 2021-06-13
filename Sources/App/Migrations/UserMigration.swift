@@ -9,6 +9,8 @@ struct UserMigration : Migration {
                 .field("name", .string, .required)
                 .field("username", .string, .required)
                 .field("password", .string, .required)
+                .field("thirdPartyAuth", .string)
+                .field("thirdPartyAuthId", .string)
                 .unique(on: "username")
                 .create()
     }

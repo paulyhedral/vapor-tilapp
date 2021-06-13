@@ -9,6 +9,7 @@ struct AuthController : RouteCollection {
         try addGoogle(routes: routes)
         try addGitHub(routes: routes)
         try addAuth0(routes: routes)
+        try addApple(routes: routes)
     }
 
     func generateRedirect(on req : Request, for user : User) -> EventLoopFuture<ResponseEncodable> {

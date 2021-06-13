@@ -13,6 +13,7 @@ let package = Package(
             .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0"),
             .package(url: "https://github.com/vapor/fluent-mongo-driver.git", from: "1.0.0"),
             .package(url: "https://github.com/vapor/leaf.git", from: "4.0.0"),
+            .package(url: "https://github.com/vapor/jwt.git", from: "4.0.0"),
 //            .package(url: "https://github.com/vapor-community/Imperial.git", from: "1.0.0")
             .package(url: "git@github.com:paulyhedral/Imperial.git", .branch("main"))
         ],
@@ -23,10 +24,11 @@ let package = Package(
                         .product(name: "Fluent", package: "fluent"),
                         .product(name: "FluentMongoDriver", package: "fluent-mongo-driver"),
                         .product(name: "Leaf", package: "leaf"),
+                        .product(name: "JWT", package: "jwt"),
                         .product(name: "Vapor", package: "vapor"),
                         .product(name: "ImperialGoogle", package: "Imperial"),
                         .product(name: "ImperialGitHub", package: "Imperial"),
-                        .product(name: "ImperialAuth0", package: "Imperial")
+                        .product(name: "ImperialAuth0", package: "Imperial"),
                     ],
                     swiftSettings: [
                         // Enable better optimizations when building in Release configuration. Despite the use of

@@ -1,4 +1,6 @@
 import Vapor
+import JWT
+import Fluent
 
 
 struct UsersController : RouteCollection {
