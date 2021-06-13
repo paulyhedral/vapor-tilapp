@@ -18,7 +18,7 @@ struct CategoriesController : RouteCollection {
 
     func createHandler(_ req : Request) throws -> EventLoopFuture<Category> {
         let category = try req.content.decode(Category.self)
-        let user = try req.auth.require(User.self)
+//        let user = try req.auth.require(User.self)
         return category.save(on: req.db)
             .map { category }
     }

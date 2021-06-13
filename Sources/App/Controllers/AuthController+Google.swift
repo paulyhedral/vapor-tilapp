@@ -44,31 +44,6 @@ extension AuthController {
         return req.redirect(to: "/auth/login/google")
     }
 
-    func generateRedirect(on req : Request, for user : User) -> EventLoopFuture<ResponseEncodable> {
-        let redirectURL : EventLoopFuture<String>
-
-        if req.session.data[Constants.oauthLoginDataKey] == Constants.iosLoginType {
-            do {
-                let token = try Token.generate(for: user)
-                redirectURL = token.save(on: req.db)
-                                   .map {
-                                       "tilapp://auth?token=\(token.value)"
-                                   }
-            }
-            catch {
-                return req.eventLoop.future(error: error)
-            }
-        }
-        else {
-            redirectURL = req.eventLoop.future("/")
-        }
-
-        req.session.data[Constants.oauthLoginDataKey] = nil
-
-        return redirectURL.map { url in
-            req.redirect(to: url)
-        }
-    }
 }
 
 struct GoogleUserInfo : Content {
@@ -89,7 +64,7 @@ extension Google {
                 .flatMapThrowing { response in
                     guard response.status == .ok else {
                         if response.status == .unauthorized {
-                            throw Abort.redirect(to: "/login-google")
+                            throw Abort.redirect(to: "/auth/login/google")
                         }
                         else {
                             throw Abort(.internalServerError)
