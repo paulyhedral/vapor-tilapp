@@ -1,3 +1,8 @@
+//
+// AppTests.swift
+// Copyright (c) 2021 Paul Schifferer.
+//
+
 @testable import App
 import XCTVapor
 

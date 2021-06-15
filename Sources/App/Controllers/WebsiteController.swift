@@ -1,20 +1,27 @@
-import Vapor
+//
+// WebsiteController.swift
+// Copyright (c) 2021 Paul Schifferer.
+//
+
 import Leaf
+import Vapor
 
-
-struct WebsiteController : RouteCollection {
-
-    func boot(routes : RoutesBuilder) throws {
-
+struct WebsiteController: RouteCollection {
+    func boot(routes: RoutesBuilder) throws {
         let authSessionRoutes = routes.grouped(User.sessionAuthenticator())
-        authSessionRoutes.get("login", use: loginHandler)
+        authSessionRoutes.get("auth", "login", use: loginHandler)
+        // authSessionRoutes.get("login", "auth0", use: loginAuth0Handler)
 
         let credentialsAuthRoutes = authSessionRoutes.grouped(User.credentialsAuthenticator())
-        credentialsAuthRoutes.post("login", use: loginPostHandler)
+        credentialsAuthRoutes.post("auth", "login", use: loginPostHandler)
 
-        authSessionRoutes.post("logout", use: logoutHandler)
-        authSessionRoutes.get("register", use: registerHandler)
-        authSessionRoutes.post("register", use: registerPostHandler)
+        authSessionRoutes.post("auth", "logout", use: logoutHandler)
+//        authSessionRoutes.get("auth", "register", use: registerHandler)
+//        authSessionRoutes.post("auth", "register", use: registerPostHandler)
+//        authSessionRoutes.get("auth", "password", "forgot", use: forgottenPasswordHandler)
+//        authSessionRoutes.post("auth", "password", "reset", use: forgottenPasswordPostHandler)
+//        authSessionRoutes.get("resetPassword", use: resetPasswordHandler)
+
         authSessionRoutes.get(use: indexHandler)
         authSessionRoutes.get("acronyms", ":acronymId", use: acronymHandler)
         authSessionRoutes.get("users", ":userId", use: userHandler)

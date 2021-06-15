@@ -1,25 +1,33 @@
+//
+// AcronymCategoryPivot.swift
+// Copyright (c) 2021 Paul Schifferer.
+//
+
 import Fluent
 import Foundation
 
-
-final class AcronymCategoryPivot : Model {
+final class AcronymCategoryPivot: Model {
     static let schema = "acronym_categories"
 
     @ID
-    var id : UUID?
+    var id: UUID?
 
     @Parent(key: "acronymId")
-    var acronym : Acronym
+    var acronym: Acronym
 
     @Parent(key: "categoryId")
-    var category : Category
+    var category: Category
+
+    // MARK: Lifecycle
 
     init() {}
 
-    init(id : UUID? = nil, acronym : Acronym, category : Category) throws {
+    init(id: UUID? = nil, acronym: Acronym, category: Category) throws {
         self.id = id
-        self.$acronym.id = try acronym.requireID()
-        self.$category.id = try category.requireID()
+        $acronym.id = try acronym.requireID()
+        $category.id = try category.requireID()
     }
-    
+
+    // MARK: Internal
+
 }

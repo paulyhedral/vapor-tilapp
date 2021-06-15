@@ -1,0 +1,96 @@
+--exclude Public,Resources
+--header "\n{file}\nCopyright (c) {year} Paul Schifferer.\n"
+--elseposition next-line
+--guardelse same-line
+--emptybraces no-space
+--extensionacl on-extension
+--patternlet hoist
+--indent 4
+--indentcase false
+--ifdef no-indent
+--xcodeindentation enabled
+--modifierorder ""
+--operatorfunc no-space
+--trimwhitespace always
+--stripunusedargs closure-only
+--voidtype void
+--funcattributes prev-line
+--typeattributes prev-line
+--varattributes prev-line
+--self insert
+
+--enable \
+  anyObjectProtocol, \
+  blankLinesAroundMark, \
+  blankLinesAtStartOfScope, \
+  blankLinesBetweenScopes, \
+  consecutiveSpaces, \
+  duplicateImports, \
+  emptyBraces, \
+  enumNamespaces, \
+  extensionAccessControl, \
+  fileHeader, \
+  hoistPatternLet, \
+  initCoderUnavailable, \
+  isEmpty, \
+  leadingDelimiters, \
+  linebreakAtEndOfFile, \
+  linebreaks, \
+  markTypes, \
+  preferKeyPath, \
+  redundantBackticks, \
+  redundantBreak, \
+  redundantExtensionACL, \
+  redundantFileprivate, \
+  redundantGet, \
+  redundantInit, \
+  redundantLet, \
+  redundantLetError, \
+  redundantNilInit, \
+  redundantObjc, \
+  redundantParens, \
+  redundantPattern, \
+  redundantRawValues, \
+  redundantReturn, \
+  redundantType, \
+  redundantVoidReturnType, \
+  sortedImports, \
+  spaceAroundBraces, \
+  spaceAroundBrackets, \
+  spaceAroundComments, \
+  spaceAroundGenerics, \
+  spaceAroundOperators, \
+  spaceInsideBraces, \
+  spaceInsideComments, \
+  strongifiedSelf, \
+  todos, \
+  trailingClosures, \
+  trailingCommas, \
+  trailingSpace, \
+  typeSugar, \
+  unusedArguments, \
+  void, \
+  wrap, \
+  wrapArguments, \
+  wrapAttributes, \
+  yodaConditions, \
+  elseOnSameLine, \
+  wrapEnumCases, \
+
+--disable \
+  wrapEnumCases, \
+  semicolons, \
+  sortedSwitchCases, \
+  organizeDeclarations, \
+  numberFormatting, \
+  andOperator, \
+  blankLinesAtEndOfScope, \
+  braces, \
+  consecutiveBlankLines, \
+  spaceInsideGenerics, \
+  spaceAroundParens, \
+  spaceInsideBrackets, \
+  spaceInsideParens, \
+  strongOutlets, \
+  wrapMultilineStatementBraces, \
+  wrapSwitchCases, \

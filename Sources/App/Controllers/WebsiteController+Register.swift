@@ -1,9 +1,13 @@
-import Vapor
+//
+// WebsiteController+Register.swift
+// Copyright (c) 2021 Paul Schifferer.
+//
+
 import Leaf
+import Vapor
 
 
 extension WebsiteController {
-
     func registerHandler(_ req : Request) throws -> EventLoopFuture<View> {
         let context : RegisterContext
         if let message = req.query[String.self, at: "message"] {
@@ -29,7 +33,7 @@ extension WebsiteController {
 
         let data = try req.content.decode(RegisterData.self)
         let password = try Bcrypt.hash(data.password)
-        let user = User(name: data.name, username: data.username, password: password)
+        let user = User(name: data.name, username: data.username, password: password, email: data.emailAddress)
 
         return user.save(on: req.db)
                    .map {
@@ -40,12 +44,13 @@ extension WebsiteController {
 }
 
 struct RegisterContext : Encodable {
-    let title = "Register"
-    let message : String?
 
     init(message : String? = nil) {
         self.message = message
     }
+
+    let title = "Register"
+    let message : String?
 }
 
 struct RegisterData : Content {
@@ -53,4 +58,5 @@ struct RegisterData : Content {
     let username : String
     let password : String
     let confirmPassword : String
+    let emailAddress : String
 }

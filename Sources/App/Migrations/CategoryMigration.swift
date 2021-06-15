@@ -1,8 +1,11 @@
+//
+// CategoryMigration.swift
+// Copyright (c) 2021 Paul Schifferer.
+//
+
 import Fluent
 
-
-struct CategoryMigration : Migration {
-
+struct CategoryMigration: Migration {
     func prepare(on database: Database) -> EventLoopFuture<Void> {
         database.schema(Category.schema)
             .id()
@@ -13,5 +16,4 @@ struct CategoryMigration : Migration {
     func revert(on database: Database) -> EventLoopFuture<Void> {
         database.schema(Category.schema).delete()
     }
-
 }

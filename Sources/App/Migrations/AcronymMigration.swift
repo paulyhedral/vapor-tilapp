@@ -1,9 +1,12 @@
+//
+// AcronymMigration.swift
+// Copyright (c) 2021 Paul Schifferer.
+//
+
 import Fluent
 
-
-struct AcronymMigration : Migration {
-
-    func prepare(on database : Database) -> EventLoopFuture<Void> {
+struct AcronymMigration: Migration {
+    func prepare(on database: Database) -> EventLoopFuture<Void> {
         database.schema(Acronym.schema)
             .id()
             .field("short", .string, .required)
@@ -12,7 +15,7 @@ struct AcronymMigration : Migration {
             .create()
     }
 
-    func revert(on database : Database) -> EventLoopFuture<Void> {
+    func revert(on database: Database) -> EventLoopFuture<Void> {
         database.schema(Acronym.schema)
             .delete()
     }
