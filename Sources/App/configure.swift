@@ -9,8 +9,9 @@ import Leaf
 import Vapor
 import SendGrid
 
+
 // configures your application
-public func configure(_ app: Application) throws {
+public func configure(_ app : Application) throws {
     // uncomment to serve files from /Public folder
     app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
     app.middleware.use(app.sessions.middleware)
@@ -21,15 +22,7 @@ public func configure(_ app: Application) throws {
 //    print("dbUrl: \(String(describing: dbUrl))")
     try app.databases.use(.mongo(connectionString: dbUrl), as: .mongo)
 
-    app.migrations.add(CreateAcronymTable())
-    app.migrations.add(CreateUserTable())
-    app.migrations.add(CreateCategoryTable())
-    app.migrations.add(CreateAcronymCategoryPivotTable())
-    app.migrations.add(CreateTokenTable())
-    app.migrations.add(SeedDatabase())
-    app.migrations.add(CreateResetPasswordTokenTable())
-    app.logger.logLevel = .debug
-    try app.autoMigrate().wait()
+    try migrations(app)
 
     app.views.use(.leaf)
 

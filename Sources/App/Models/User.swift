@@ -37,12 +37,16 @@ final class User : Model {
     @OptionalField(key: User.v20210601.profilePicture)
     var profilePicture : String?
 
+    @OptionalField(key: User.v20210616.twitterURL)
+    var twitterURL : String?
+
     init() {
     }
 
     init(id : UUID? = nil, name : String, username : String, // password : String,
          thirdPartyAuth : String? = nil, thirdPartyAuthId : String? = nil,
-         email : String, profilePicture : String? = nil) {
+         email : String, profilePicture : String? = nil,
+         twitterURL : String? = nil) {
         self.id = id
         self.name = name
         self.username = username
@@ -51,19 +55,21 @@ final class User : Model {
         self.thirdPartyAuthId = thirdPartyAuthId
         self.email = email
         self.profilePicture = profilePicture
+        self.twitterURL = twitterURL
     }
 
     final class Public : Content {
-
-        init(id : UUID?, name : String, username : String) {
-            self.id = id
-            self.name = name
-            self.username = username
-        }
-
         var id : UUID?
         var name : String
         var username : String
+        var twitterURL : String?
+
+        init(id : UUID?, name : String, username : String, twitterURL : String? = nil) {
+            self.id = id
+            self.name = name
+            self.username = username
+            self.twitterURL = twitterURL
+        }
     }
 }
 

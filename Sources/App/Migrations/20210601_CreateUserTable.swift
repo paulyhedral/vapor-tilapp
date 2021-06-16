@@ -12,7 +12,7 @@ struct CreateUserTable : Migration {
                 .id()
                 .field(User.v20210601.name, .string, .required)
                 .field(User.v20210601.username, .string, .required)
-//                .field("password", .string, .required)
+                //                .field("password", .string, .required)
                 .field(User.v20210601.thirdPartyAuth, .string)
                 .field(User.v20210601.thirdPartyAuthId, .string)
                 .field(User.v20210601.email, .string, .required)
