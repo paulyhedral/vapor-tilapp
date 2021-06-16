@@ -34,7 +34,7 @@ extension AuthController {
                               guard let existingUser = foundUser else {
                                   let user = User(name: userInfo.name,
                                           username: userInfo.login,
-                                          password: "",
+//                                          password: "",
                                           thirdPartyAuth: Self.githubAuthTypeId,
                                           thirdPartyAuthId: userInfo.login,
                                           email: emailInfo[0].email)

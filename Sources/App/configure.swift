@@ -21,13 +21,13 @@ public func configure(_ app: Application) throws {
 //    print("dbUrl: \(String(describing: dbUrl))")
     try app.databases.use(.mongo(connectionString: dbUrl), as: .mongo)
 
-    app.migrations.add(AcronymMigration())
-    app.migrations.add(UserMigration())
-    app.migrations.add(CategoryMigration())
-    app.migrations.add(AcronymCategoryPivotMigration())
-    app.migrations.add(TokenMigration())
+    app.migrations.add(CreateAcronymTable())
+    app.migrations.add(CreateUserTable())
+    app.migrations.add(CreateCategoryTable())
+    app.migrations.add(CreateAcronymCategoryPivotTable())
+    app.migrations.add(CreateTokenTable())
     app.migrations.add(SeedDatabase())
-    app.migrations.add(ResetPasswordTokenMigration())
+    app.migrations.add(CreateResetPasswordTokenTable())
     app.logger.logLevel = .debug
     try app.autoMigrate().wait()
 

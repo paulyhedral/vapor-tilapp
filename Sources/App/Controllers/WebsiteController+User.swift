@@ -6,21 +6,22 @@
 import Leaf
 import Vapor
 
+
 extension WebsiteController {
-    func userHandler(_ req: Request) -> EventLoopFuture<View> {
+    func userHandler(_ req : Request) -> EventLoopFuture<View> {
         User.find(req.parameters.get("userId"),
-                  on: req.db)
+                    on: req.db)
             .unwrap(or: Abort(.notFound))
             .flatMap { user in
                 user.$acronyms.get(on: req.db)
-                    .flatMap { acronyms in
-                        let context = UserContext(title: user.name, user: user, acronyms: acronyms)
-                        return req.view.render("user", context)
-                    }
+                              .flatMap { acronyms in
+                                  let context = UserContext(title: user.name, user: user, acronyms: acronyms)
+                                  return req.view.render("user", context)
+                              }
             }
     }
 
-    func allUsersHandler(_ req: Request) -> EventLoopFuture<View> {
+    func allUsersHandler(_ req : Request) -> EventLoopFuture<View> {
         User.query(on: req.db)
             .all()
             .flatMap { users in
@@ -32,15 +33,15 @@ extension WebsiteController {
 
 // MARK: - UserContext
 
-struct UserContext: Encodable {
-    let title: String
-    let user: User
-    let acronyms: [Acronym]
+struct UserContext : Encodable {
+    let title : String
+    let user : User
+    let acronyms : [Acronym]
 }
 
 // MARK: - AllUsersContext
 
-struct AllUsersContext: Encodable {
-    let title: String
-    let users: [User]
+struct AllUsersContext : Encodable {
+    let title : String
+    let users : [User]
 }

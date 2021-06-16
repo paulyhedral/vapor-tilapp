@@ -3,7 +3,7 @@
 // Copyright (c) 2021 Paul Schifferer.
 //
 
-import ImperialAuth0
+//import ImperialAuth0
 import Leaf
 import Vapor
 
@@ -21,23 +21,23 @@ extension WebsiteController {
 
         return req.view.render("login", context)
     }
-
-    //   func loginAuth0Handler(_ req: Request) throws -> EventLoopFuture<Response> {
-    //     let auth = Auth0Auth()
-    //     return req.redirect(to: auth.authURL)
-    //   }
-
-    func loginPostHandler(_ req : Request) throws -> EventLoopFuture<Response> {
-        if req.auth.has(User.self) {
-            return req.eventLoop.future(req.redirect(to: "/"))
-        }
-        else {
-            let context = LoginContext(loginError: "TODO")
-            return req.view
-                    .render("login", context)
-                    .encodeResponse(for: req)
-        }
-    }
+//
+//    //   func loginAuth0Handler(_ req: Request) throws -> EventLoopFuture<Response> {
+//    //     let auth = Auth0Auth()
+//    //     return req.redirect(to: auth.authURL)
+//    //   }
+//
+//    func loginPostHandler(_ req : Request) throws -> EventLoopFuture<Response> {
+//        if req.auth.has(User.self) {
+//            return req.eventLoop.future(req.redirect(to: "/"))
+//        }
+//        else {
+//            let context = LoginContext(loginError: "TODO")
+//            return req.view
+//                    .render("login", context)
+//                    .encodeResponse(for: req)
+//        }
+//    }
 
     func logoutHandler(_ req : Request) throws -> Response {
         req.auth.logout(User.self)

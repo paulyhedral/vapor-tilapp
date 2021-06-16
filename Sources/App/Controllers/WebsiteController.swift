@@ -6,14 +6,15 @@
 import Leaf
 import Vapor
 
-struct WebsiteController: RouteCollection {
-    func boot(routes: RoutesBuilder) throws {
+
+struct WebsiteController : RouteCollection {
+    func boot(routes : RoutesBuilder) throws {
         let authSessionRoutes = routes.grouped(User.sessionAuthenticator())
         authSessionRoutes.get("auth", "login", use: loginHandler)
         // authSessionRoutes.get("login", "auth0", use: loginAuth0Handler)
 
-        let credentialsAuthRoutes = authSessionRoutes.grouped(User.credentialsAuthenticator())
-        credentialsAuthRoutes.post("auth", "login", use: loginPostHandler)
+//        let credentialsAuthRoutes = authSessionRoutes.grouped(User.credentialsAuthenticator())
+//        credentialsAuthRoutes.post("auth", "login", use: loginPostHandler)
 
         authSessionRoutes.post("auth", "logout", use: logoutHandler)
 //        authSessionRoutes.get("auth", "register", use: registerHandler)
@@ -29,7 +30,7 @@ struct WebsiteController: RouteCollection {
         authSessionRoutes.get("categories", use: allCategoriesHandler)
         authSessionRoutes.get("categories", ":categoryId", use: categoryHandler)
 
-        let protectedRoutes = authSessionRoutes.grouped(User.redirectMiddleware(path: "/login"))
+        let protectedRoutes = authSessionRoutes.grouped(User.redirectMiddleware(path: "/auth/login"))
         protectedRoutes.get("acronyms", "create", use: createAcronymHandler)
         protectedRoutes.post("acronyms", "create", use: createAcronymPostHandler)
         protectedRoutes.get("acronyms", ":acronymId", "edit", use: editAcronymHandler)

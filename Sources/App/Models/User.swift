@@ -8,15 +8,15 @@ import Vapor
 
 
 final class User : Model {
-    static let schema = "users"
+    static let schema = User.v20210601.schemaName
 
     @ID
     var id : UUID?
 
-    @Field(key: "name")
+    @Field(key: User.v20210601.name)
     var name : String
 
-    @Field(key: "username")
+    @Field(key: User.v20210601.username)
     var username : String
 
 //    @Field(key: "password")
@@ -25,23 +25,24 @@ final class User : Model {
     @Children(for: \.$user)
     var acronyms : [Acronym]
 
-    @OptionalField(key: "thirdPartyAuth")
+    @OptionalField(key: User.v20210601.thirdPartyAuth)
     var thirdPartyAuth : String?
 
-    @OptionalField(key: "thirdPartyAuthId")
+    @OptionalField(key: User.v20210601.thirdPartyAuthId)
     var thirdPartyAuthId : String?
 
-    @Field(key: "email")
+    @Field(key: User.v20210601.email)
     var email : String
 
-    // MARK: Lifecycle
+    @OptionalField(key: User.v20210601.profilePicture)
+    var profilePicture : String?
 
     init() {
     }
 
     init(id : UUID? = nil, name : String, username : String, // password : String,
          thirdPartyAuth : String? = nil, thirdPartyAuthId : String? = nil,
-         email : String) {
+         email : String, profilePicture : String? = nil) {
         self.id = id
         self.name = name
         self.username = username
@@ -49,20 +50,16 @@ final class User : Model {
         self.thirdPartyAuth = thirdPartyAuth
         self.thirdPartyAuthId = thirdPartyAuthId
         self.email = email
+        self.profilePicture = profilePicture
     }
 
-    // MARK: Internal
-
     final class Public : Content {
-        // MARK: Lifecycle
 
         init(id : UUID?, name : String, username : String) {
             self.id = id
             self.name = name
             self.username = username
         }
-
-        // MARK: Internal
 
         var id : UUID?
         var name : String
@@ -102,7 +99,6 @@ extension EventLoopFuture where Value == [User] {
     }
 }
 
-
 //extension User : ModelAuthenticatable {
 //    static let usernameKey = \User.$username
 //    static let passwordHashKey = \User.$password
@@ -112,8 +108,6 @@ extension EventLoopFuture where Value == [User] {
 //    }
 //}
 
-
 extension User : ModelSessionAuthenticatable {}
-
 
 //extension User : ModelCredentialsAuthenticatable {}

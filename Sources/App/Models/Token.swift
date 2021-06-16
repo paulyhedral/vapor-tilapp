@@ -6,53 +6,44 @@
 import Fluent
 import Vapor
 
-// MARK: - Token
 
-final class Token: Model {
-    static let schema = "tokens"
+final class Token : Model {
+    static let schema = Token.v20210601.schemaName
 
     @ID
-    var id: UUID?
+    var id : UUID?
 
-    @Field(key: "value")
-    var value: String
+    @Field(key: Token.v20210601.value)
+    var value : String
 
-    @Parent(key: "userId")
-    var user: User
+    @Parent(key: Token.v20210601.userId)
+    var user : User
 
-    // MARK: Lifecycle
+    init() {
+    }
 
-    init() {}
-
-    init(id: UUID? = nil, value: String, userId: User.IDValue) {
+    init(id : UUID? = nil, value : String, userId : User.IDValue) {
         self.id = id
         self.value = value
         $user.id = userId
     }
-
-    // MARK: Internal
-
 }
 
-// MARK: Content
-
-extension Token: Content {}
+extension Token : Content {}
 
 extension Token {
-    static func generate(for user: User) throws -> Token {
-        let random = [UInt8].random(count: 56).base64
+    static func generate(for user : User) throws -> Token {
+        let random = [ UInt8 ].random(count: 56).base64
         return try Token(value: random, userId: user.requireID())
     }
 }
 
-// MARK: ModelTokenAuthenticatable
-
-extension Token: ModelTokenAuthenticatable {
+extension Token : ModelTokenAuthenticatable {
     static let valueKey = \Token.$value
     static let userKey = \Token.$user
     typealias User = App.User
 
-    var isValid: Bool {
+    var isValid : Bool {
         true
     }
 }

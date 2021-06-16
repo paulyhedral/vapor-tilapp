@@ -6,28 +6,25 @@
 import Fluent
 import Foundation
 
-final class AcronymCategoryPivot: Model {
-    static let schema = "acronym_categories"
+
+final class AcronymCategoryPivot : Model {
+    static let schema = AcronymCategoryPivot.v20210601.schemaName
 
     @ID
-    var id: UUID?
+    var id : UUID?
 
-    @Parent(key: "acronymId")
-    var acronym: Acronym
+    @Parent(key: AcronymCategoryPivot.v20210601.acronymId)
+    var acronym : Acronym
 
-    @Parent(key: "categoryId")
-    var category: Category
+    @Parent(key: AcronymCategoryPivot.v20210601.categoryId)
+    var category : Category
 
-    // MARK: Lifecycle
-
-    init() {}
-
-    init(id: UUID? = nil, acronym: Acronym, category: Category) throws {
-        self.id = id
-        $acronym.id = try acronym.requireID()
-        $category.id = try category.requireID()
+    init() {
     }
 
-    // MARK: Internal
-
+    init(id : UUID? = nil, acronym : Acronym, category : Category) throws {
+        self.id = id
+        self.$acronym.id = try acronym.requireID()
+        self.$category.id = try category.requireID()
+    }
 }

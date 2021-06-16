@@ -6,40 +6,35 @@
 import Fluent
 import Vapor
 
-// MARK: - Acronym
 
-final class Acronym: Model {
-    // MARK: Internal
+final class Acronym : Model {
 
-    static let schema = "acronyms"
+    static let schema = Acronym.v20210601.schemaName
 
     @ID
-    var id: UUID?
+    var id : UUID?
 
-    @Field(key: "short")
-    var short: String
+    @Field(key: Acronym.v20210601.short)
+    var short : String
 
-    @Field(key: "long")
-    var long: String
+    @Field(key: Acronym.v20210601.long)
+    var long : String
 
-    @Parent(key: "userId")
-    var user: User
+    @Parent(key: Acronym.v20210601.userId)
+    var user : User
 
     @Siblings(through: AcronymCategoryPivot.self, from: \.$acronym, to: \.$category)
-    var categories: [Category]
+    var categories : [Category]
 
-    // MARK: Lifecycle
+    init() {
+    }
 
-    init() {}
-
-    init(id: UUID? = nil, short: String, long: String, userId: User.IDValue) {
+    init(id : UUID? = nil, short : String, long : String, userId : User.IDValue) {
         self.id = id
         self.short = short
         self.long = long
-        $user.id = userId
+        self.$user.id = userId
     }
 }
 
-// MARK: Content
-
-extension Acronym: Content {}
+extension Acronym : Content {}
