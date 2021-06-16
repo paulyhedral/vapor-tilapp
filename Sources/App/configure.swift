@@ -25,6 +25,7 @@ public func configure(_ app : Application) throws {
     try migrations(app)
 
     app.views.use(.leaf)
+    app.caches.use(.fluent)
 
     // register routes
     try routes(app)

@@ -25,6 +25,8 @@ public func migrations(_ app : Application) throws {
         break
     }
 
+    app.migrations.add(CacheEntry.migration)
+
     app.logger.logLevel = .debug
     try app.autoMigrate().wait()
 }
