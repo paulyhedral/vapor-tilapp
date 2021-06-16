@@ -44,15 +44,10 @@
             <a href="/acronyms/create" class="nav-link">Create An Acronym</a>
             </li>
 
-            #if(!userLoggedIn):
-            <li class="nav-item #if(title == " Register"): active #endif">
-            <a href="/register" class="nav-link">Register</a>
-            </li>
-            #endif
         </ul>
 
         #if(userLoggedIn):
-        <form class="form-inline" action="/logout" method="POST">
+        <form class="form-inline" action="/auth/logout" method="POST">
             <input class="nav-link btn btn-secondary mr-sm-2"
                    type="submit" value="Log out">
         </form>
@@ -79,12 +74,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2"
         crossorigin="anonymous"></script>
-#if(title == "Create An Acronym" || title == "Edit Acronym"):
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
-        integrity="sha384-JnbsSLBmv2/R0fUmF2XYIcAEMPHEAO51Gitn9IjL4l89uFTIgtLF1+jqIqqd9FSk"
-        crossorigin="anonymous"></script>
-<script src="/scripts/createAcronym.js"></script>
-#endif
 
 </body>
 </html>
