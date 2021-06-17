@@ -13,6 +13,12 @@ final class Token : Model {
     @ID
     var id : UUID?
 
+    @Timestamp(key: Token.v20210616.createdAt, on: .create)
+    var createdAt : Date?
+
+    @Timestamp(key: Token.v20210616.updatedAt, on: .update)
+    var updatedAt : Date?
+
     @Field(key: Token.v20210601.value)
     var value : String
 

@@ -13,6 +13,12 @@ final class Category : Model {
     @ID
     var id : UUID?
 
+    @Timestamp(key: Category.v20210616.createdAt, on: .create)
+    var createdAt : Date?
+
+    @Timestamp(key: Category.v20210616.updatedAt, on: .update)
+    var updatedAt : Date?
+
     @Field(key: Category.v20210601.name)
     var name : String
 

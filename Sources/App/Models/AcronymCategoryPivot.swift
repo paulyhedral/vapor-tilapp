@@ -13,6 +13,12 @@ final class AcronymCategoryPivot : Model {
     @ID
     var id : UUID?
 
+    @Timestamp(key: AcronymCategoryPivot.v20210616.createdAt, on: .create)
+    var createdAt : Date?
+
+    @Timestamp(key: AcronymCategoryPivot.v20210616.updatedAt, on: .update)
+    var updatedAt : Date?
+
     @Parent(key: AcronymCategoryPivot.v20210601.acronymId)
     var acronym : Acronym
 

@@ -16,6 +16,12 @@ public func migrations(_ app : Application) throws {
 //    app.migrations.add(CreateResetPasswordTokenTable())
     app.migrations.add(AddTwitterHandle())
     app.migrations.add(MakeCategoriesUnique())
+    app.migrations.add(SoftDeleteUser())
+    app.migrations.add(UserAuditFields())
+    app.migrations.add(CategoryAuditFields())
+    app.migrations.add(TokenAuditFields())
+    app.migrations.add(AcronymAuditFields())
+    app.migrations.add(AcronymCategoryPivotAuditFields())
 
     switch app.environment {
     case .development, .testing:

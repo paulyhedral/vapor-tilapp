@@ -13,6 +13,12 @@ final class User : Model {
     @ID
     var id : UUID?
 
+    @Timestamp(key: User.v20210616.createdAt, on: .create)
+    var createdAt: Date?
+
+    @Timestamp(key: User.v20210616.updatedAt, on: .update)
+    var updatedAt: Date?
+
     @Field(key: User.v20210601.name)
     var name : String
 
@@ -24,6 +30,9 @@ final class User : Model {
 
     @Children(for: \.$user)
     var acronyms : [Acronym]
+
+    @Timestamp(key: User.v20210616.deletedAt, on: .delete)
+    var deletedAt : Date?
 
     @OptionalField(key: User.v20210601.thirdPartyAuth)
     var thirdPartyAuth : String?
