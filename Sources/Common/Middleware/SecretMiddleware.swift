@@ -6,16 +6,16 @@ import Foundation
 import Vapor
 
 
-final class SecretHeaderMiddleware : Middleware {
+public final class SecretHeaderMiddleware : Middleware {
     let header : String
     let secret : String
 
-    init(header : String = "X-Secret", secret : String) {
+    public init(header : String = "X-Secret", secret : String) {
         self.header = header
         self.secret = secret
     }
 
-    func respond(to request : Request, chainingTo next : Responder) -> EventLoopFuture<Response> {
+    public func respond(to request : Request, chainingTo next : Responder) -> EventLoopFuture<Response> {
         guard let secretValue = request.headers.first(name: header) else {
             return request.eventLoop.makeFailedFuture(Abort(.badRequest, reason: "Missing '\(header)' header."))
         }
@@ -28,7 +28,7 @@ final class SecretHeaderMiddleware : Middleware {
 }
 
 extension SecretHeaderMiddleware {
-    static func detect() throws -> Self {
+    public static func detect() throws -> Self {
         guard let value = Environment.get("SECRET_VALUE") else {
             throw Abort(.internalServerError, reason: "No SECRET_VALUE set in environment!")
         }

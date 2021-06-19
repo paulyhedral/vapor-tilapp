@@ -47,7 +47,7 @@ extension Token {
 extension Token : ModelTokenAuthenticatable {
     static let valueKey = \Token.$value
     static let userKey = \Token.$user
-    typealias User = App.User
+    typealias User = UsersApp.User
 
     var isValid : Bool {
         true

@@ -18,7 +18,7 @@ struct UsersController : RouteCollection {
         group.get(":userId", use: self.getHandler)
         //        group.put(":userId", use: updateHandler)
         //        group.delete(":userId", use: deleteHandler)
-        group.get(":userId", "acronyms", use: self.getAcronymsHandler)
+//        group.get(":userId", "acronyms", use: self.getAcronymsHandler)
 
 //        let basicAuthMiddleware = User.authenticator()
 //        let basicProtected = group.grouped(basicAuthMiddleware)
@@ -59,16 +59,16 @@ struct UsersController : RouteCollection {
     //        <#code#>
     //    }
 
-    func getAcronymsHandler(_ req : Request) -> EventLoopFuture<[Acronym]> {
-        User.find(
-                    req.parameters.get("userId"),
-                    on: req.db
-            )
-            .unwrap(or: Abort(.notFound))
-            .flatMap { user in
-                user.$acronyms.get(on: req.db)
-            }
-    }
+//    func getAcronymsHandler(_ req : Request) -> EventLoopFuture<[Acronym]> {
+//        User.find(
+//                    req.parameters.get("userId"),
+//                    on: req.db
+//            )
+//            .unwrap(or: Abort(.notFound))
+//            .flatMap { user in
+//                user.$acronyms.get(on: req.db)
+//            }
+//    }
 
     func loginHandler(_ req : Request) throws -> EventLoopFuture<Token> {
         let user = try req.auth.require(User.self)

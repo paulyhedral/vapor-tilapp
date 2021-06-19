@@ -6,7 +6,6 @@
 import Fluent
 import Vapor
 
-// MARK: - AcronymsController
 
 struct AcronymsController: RouteCollection {
     static let endpointPath: PathComponent = "acronyms"
@@ -19,17 +18,17 @@ struct AcronymsController: RouteCollection {
         group.get("search", use: self.searchHandler)
         group.get("first", use: self.getFirstHandler)
         group.get("sorted", use: self.sortedHandler)
-        group.get(":acronymId", "user", use: self.getUserHandler)
+//        group.get(":acronymId", "user", use: self.getUserHandler)
         group.get(":acronymId", "categories", use: self.getCategoriesHandler)
 
-        let tokenAuthMiddleware = Token.authenticator()
-        let guardAuthMiddleware = User.guardMiddleware()
-        let protected = group.grouped(tokenAuthMiddleware, guardAuthMiddleware)
-        protected.post(use: self.createHandler)
-        protected.put(":acronymId", use: self.updateHandler)
-        protected.delete(":acronymId", use: self.deleteHandler)
-        protected.post(":acronymId", "categories", ":categoryId", use: self.addCategoriesHandler)
-        protected.delete(":acronymId", "categories", ":categoryId", use: self.removeCategoriesHandler)
+//        let tokenAuthMiddleware = Token.authenticator()
+//        let guardAuthMiddleware = User.guardMiddleware()
+//        let protected = group.grouped(tokenAuthMiddleware, guardAuthMiddleware)
+//        protected.post(use: self.createHandler)
+//        protected.put(":acronymId", use: self.updateHandler)
+//        protected.delete(":acronymId", use: self.deleteHandler)
+//        protected.post(":acronymId", "categories", ":categoryId", use: self.addCategoriesHandler)
+//        protected.delete(":acronymId", "categories", ":categoryId", use: self.removeCategoriesHandler)
     }
 
     func getAllHandler(_ req: Request) -> EventLoopFuture<[Acronym]> {
@@ -156,7 +155,6 @@ struct AcronymsController: RouteCollection {
     }
 }
 
-// MARK: - CreateAcronymData
 
 struct CreateAcronymData: Content {
     let short: String

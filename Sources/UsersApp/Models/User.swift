@@ -28,8 +28,8 @@ final class User : Model {
 //    @Field(key: "password")
 //    var password : String
 
-    @Children(for: \.$user)
-    var acronyms : [Acronym]
+//    @Children(for: \.$user)
+//    var acronyms : [Acronym]
 
     @Timestamp(key: User.v20210616.deletedAt, on: .delete)
     var deletedAt : Date?
@@ -43,11 +43,11 @@ final class User : Model {
     @Field(key: User.v20210601.email)
     var email : String
 
-    @OptionalField(key: User.v20210601.profilePicture)
-    var profilePicture : String?
+//    @OptionalField(key: User.v20210601.profilePicture)
+//    var profilePicture : String?
 
-    @OptionalField(key: User.v20210616.twitterURL)
-    var twitterURL : String?
+//    @OptionalField(key: User.v20210616.twitterURL)
+//    var twitterURL : String?
 
     init() {
     }
@@ -63,8 +63,8 @@ final class User : Model {
         self.thirdPartyAuth = thirdPartyAuth
         self.thirdPartyAuthId = thirdPartyAuthId
         self.email = email
-        self.profilePicture = profilePicture
-        self.twitterURL = twitterURL
+//        self.profilePicture = profilePicture
+//        self.twitterURL = twitterURL
     }
 
     final class Public : Content {

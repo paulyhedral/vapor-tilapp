@@ -6,8 +6,12 @@ import Vapor
 import Foundation
 
 
-final class LogRequestMiddleware : Middleware {
-    func respond(to request : Request, chainingTo next : Responder) -> EventLoopFuture<Response> {
+public final class LogRequestMiddleware : Middleware {
+
+    public init() {
+    }
+
+    public func respond(to request : Request, chainingTo next : Responder) -> EventLoopFuture<Response> {
         let start = Date()
         return next.respond(to: request).map { response in
             self.log(response, start: start, for: request)

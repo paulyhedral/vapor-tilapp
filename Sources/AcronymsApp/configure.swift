@@ -8,6 +8,7 @@ import FluentMongoDriver
 import Leaf
 import Vapor
 import SendGrid
+import Redis
 
 
 // configures your application
@@ -23,9 +24,14 @@ public func configure(_ app : Application) throws {
 //    print("dbUrl: \(String(describing: dbUrl))")
     try app.databases.use(.mongo(connectionString: dbUrl), as: .mongo)
 
+    let redisHostname = Environment.get("REDIS_HOSTNAME") ?? "localhost"
+    let redisConfig = try RedisConfiguration(hostname: redisHostname)
+    app.redis.configuration = redisConfig
+
     try migrations(app)
 
     app.views.use(.leaf)
+    app.sessions.use(.redis)
     app.caches.use(.fluent)
 
     // register routes
